@@ -1,0 +1,8 @@
+{
+  "yaml.schemas": {
+    "kubernetes://schema/v1@service": [
+      "file:///home/mikkel-johan-meldgaard-raben/Code/bully-alg/kubernetes/get-pods-service.yaml",
+      "file:///home/mikkel-johan-meldgaard-raben/Code/bully-alg/kubernetes/get-cookies.yaml"
+    ]
+  }
+}

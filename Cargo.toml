@@ -1,0 +1,20 @@
+[package]
+name = "leader-election"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+dns-lookup = "3.0.1"
+futures = "0.3.31"
+reqwest = "0.12.24"
+rocket = { version = "0.5.1", features = ["json"] }
+serde = "1.0.228"
+
+[dependencies.uuid]
+version = "1.18.1"
+# Lets you generate random UUIDs
+features = [
+    "v4",
+    "serde",
+]
+
