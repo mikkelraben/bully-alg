@@ -71,6 +71,8 @@ USER appuser
 # Copy the executable from the "build" stage.
 COPY --from=build /bin/server /bin/
 
+COPY ./website /website
+
 # Install CA certificates so HTTPS clients inside the container can verify
 # server certificates at runtime.
 USER root

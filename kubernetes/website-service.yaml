@@ -1,0 +1,13 @@
+﻿apiVersion: v1
+kind: Service
+metadata:
+  name: website-service
+spec:
+  selector:
+    app: leader-election-app
+    coordinator: "true"
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 8080
