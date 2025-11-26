@@ -43,4 +43,4 @@ async function getState() {
 fortuneButton.addEventListener('click', getFortune);
 
 // Hent state ved page load (til debugging - kan udkommenteres)
-getState();
+//getState();
