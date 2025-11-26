@@ -39,7 +39,7 @@ async function getState() {
     }
 }
 
-// Tilføj event listener til knappen - bruger nu API
+// Event listener til knappen
 fortuneButton.addEventListener('click', getFortune);
 
 // Hent state ved page load (til debugging - kan udkommenteres)
