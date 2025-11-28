@@ -2,7 +2,7 @@
 const fortuneText = document.getElementById('fortune-text');
 const fortuneButton = document.getElementById('fortune-button');
 
-// API endpoint - bruger relative path så det virker både lokalt og i Kubernetes
+// API endpoint
 const API_URL = window.location.origin;
 
 // Funktion til at hente fortune fra Rust API
