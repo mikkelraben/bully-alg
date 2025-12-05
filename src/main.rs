@@ -51,7 +51,12 @@ static STATE: AppState = AppState {
 // sends a health check request to the coordinator pod
 async fn coordinator_health_check(coordinator: &PodInfo) -> bool {
     let url = format!("http://{}:8080/get-id", coordinator.ip_address);
-    let response = reqwest::get(&url).await;
+    let client = reqwest::Client::new();
+    let response = client
+        .get(&url)
+        .timeout(std::time::Duration::from_secs(1))
+        .send()
+        .await;
     // get the id from the coordinator pod
     match response {
         // if we get a response, check if the id matches the coordinator's id
@@ -140,9 +145,14 @@ async fn find_pods() -> Vec<PodInfo> {
     let ips = lookup_host("get-pods-service:8080").await.unwrap();
 
     let mut pods = Vec::new();
+    let client = reqwest::Client::new();
 
     for ip in ips {
-        let response = reqwest::get(format!("http://{}:8080/get-id", ip.ip())).await;
+        let response = client
+            .get(format!("http://{}:8080/get-id", ip.ip()))
+            .timeout(std::time::Duration::from_secs(1))
+            .send()
+            .await;
         //println!("response: {:?}", response);
 
         let id = match response {
@@ -307,7 +317,7 @@ fn periodic_check() {
         // initial delay before starting the periodic check
         rocket::tokio::time::sleep(rocket::tokio::time::Duration::from_secs(5)).await;
         let mut interval =
-            rocket::tokio::time::interval(rocket::tokio::time::Duration::from_secs(10));
+            rocket::tokio::time::interval(rocket::tokio::time::Duration::from_secs(1));
         loop {
             interval.tick().await;
             *STATE.known_pods.lock().unwrap() = find_pods().await;
